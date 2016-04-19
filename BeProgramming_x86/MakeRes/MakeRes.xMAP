@@ -1,0 +1,584 @@
+Address   Size      Name    Subname  Module
+
+80001000 00000051 .text    $         MakeResMain.o(_main)
+80001051 000000b7 .text    $         MakeResApp.o(?ArgvReceived@MakeResApp@@EAEXJPAPAD@Z)
+80001108 00000030 .text    $         MakeResApp.o(?ReadyToRun@MakeResApp@@EAEXXZ)
+80001138 00000050 .text    $         MakeResApp.o(?MessageReceived@MakeResApp@@EAEXPAVBMessage@@@Z)
+80001188 0000019c .text    $         MakeResApp.o(?SaveRequested@MakeResApp@@AAEXPAVBMessage@@@Z)
+80001324 0000018c .text    $         MakeResApp.o(?MakeResFile@MakeResApp@@AAEJABUentry_ref@@_N@Z)
+800014b0 000000bf .text    $         MakeResApp.o(?OpenSavePanel@MakeResApp@@AAEXXZ)
+8000156f 0000002a .text    $         MakeResApp.o(??0MakeResApp@@QAE@XZ)
+80001599 0000001b .text    $         MakeResApp.o(??1MakeResApp@@UAE@XZ)
+800015b4 0000004e .text    $         MakeResApp.o(??_EMakeResApp@@UAE@I@Z)
+80001602 00000063 .text    $         kgAlert.o(?KGAlert@@YAXPBD@Z)
+80001665 00000036 .text    $         kgDebug.o(?Error@@YAXPBDJ@Z)
+8000169b 00000019 .text    $         init_term_dyn.o(__init_routine_)
+800016b4 00000019 .text    $         init_term_dyn.o(__term_routine_)
+800016cd 000000ab .text    $         start_dyn.o(__start)
+80001778 00000006 .text    $         libbe.so(??1entry_ref@@QAE@XZ)
+8000177e 00000006 .text    $         libbe.so(??1BEntry@@UAE@XZ)
+80001784 00000006 .text    $         libbe.so(??1BDirectory@@UAE@XZ)
+8000178a 00000006 .text    $         libbe.so(??1BResources@@UAE@XZ)
+80001790 00000006 .text    $         libbe.so(??1BFile@@UAE@XZ)
+80001796 00000006 .text    $         libroot.so(??2@YAPAXK@Z)
+8000179c 00000006 .text    $         libroot.so(___dynamic_cast)
+800017a2 00000006 .text    $         libroot.so(??3@YAXPAX@Z)
+800017a8 00000006 .text    $         libbe.so(?_ReservedArchivable3@BArchivable@@EAEXXZ)
+800017ae 00000006 .text    $         libbe.so(?_ReservedArchivable2@BArchivable@@EAEXXZ)
+800017b4 00000006 .text    $         libbe.so(?_ReservedArchivable1@BArchivable@@EAEXXZ)
+800017ba 00000006 .text    $         libbe.so(?_ReservedHandler4@BHandler@@EAEXXZ)
+800017c0 00000006 .text    $         libbe.so(?_ReservedHandler3@BHandler@@EAEXXZ)
+800017c6 00000006 .text    $         libbe.so(?_ReservedHandler2@BHandler@@EAEXXZ)
+800017cc 00000006 .text    $         libbe.so(?_ReservedHandler1@BHandler@@EAEXXZ)
+800017d2 00000006 .text    $         libbe.so(?SetFilterList@BHandler@@UAEXPAVBList@@@Z)
+800017d8 00000006 .text    $         libbe.so(?RemoveFilter@BHandler@@UAE_NPAVBMessageFilter@@@Z)
+800017de 00000006 .text    $         libbe.so(?AddFilter@BHandler@@UAEXPAVBMessageFilter@@@Z)
+800017e4 00000006 .text    $         libbe.so(?SetNextHandler@BHandler@@UAEXPAV1@@Z)
+800017ea 00000006 .text    $         libbe.so(?task_looper@BLooper@@EAEXXZ)
+800017f0 00000006 .text    $         libbe.so(?ConvertToMessage@BLooper@@EAEPAVBMessage@@PAXJ@Z)
+800017f6 00000006 .text    $         libbe.so(?_ReservedLooper6@BLooper@@EAEXXZ)
+800017fc 00000006 .text    $         libbe.so(?_ReservedLooper5@BLooper@@EAEXXZ)
+80001802 00000006 .text    $         libbe.so(?_ReservedLooper4@BLooper@@EAEXXZ)
+80001808 00000006 .text    $         libbe.so(?_ReservedLooper3@BLooper@@EAEXXZ)
+8000180e 00000006 .text    $         libbe.so(?_ReservedLooper2@BLooper@@EAEXXZ)
+80001814 00000006 .text    $         libbe.so(?_ReservedLooper1@BLooper@@EAEXXZ)
+8000181a 00000006 .text    $         libbe.so(?SetCommonFilterList@BLooper@@UAEXPAVBList@@@Z)
+80001820 00000006 .text    $         libbe.so(?RemoveCommonFilter@BLooper@@UAE_NPAVBMessageFilter@@@Z)
+80001826 00000006 .text    $         libbe.so(?AddCommonFilter@BLooper@@UAEXPAVBMessageFilter@@@Z)
+8000182c 00000006 .text    $         libbe.so(?ScriptReceived@BApplication@@EAE_NPAVBMessage@@J0JPBD@Z)
+80001832 00000006 .text    $         libbe.so(?_ReservedApplication8@BApplication@@EAEXXZ)
+80001838 00000006 .text    $         libbe.so(?_ReservedApplication7@BApplication@@EAEXXZ)
+8000183e 00000006 .text    $         libbe.so(?_ReservedApplication6@BApplication@@EAEXXZ)
+80001844 00000006 .text    $         libbe.so(?_ReservedApplication5@BApplication@@EAEXXZ)
+8000184a 00000006 .text    $         libbe.so(?_ReservedApplication4@BApplication@@EAEXXZ)
+80001850 00000006 .text    $         libbe.so(?_ReservedApplication3@BApplication@@EAEXXZ)
+80001856 00000006 .text    $         libbe.so(?_ReservedApplication2@BApplication@@EAEXXZ)
+8000185c 00000006 .text    $         libbe.so(?_ReservedApplication1@BApplication@@EAEXXZ)
+80001862 00000006 .text    $         libbe.so(?Perform@BApplication@@UAEJKPAX@Z)
+80001868 00000006 .text    $         libbe.so(?GetSupportedSuites@BApplication@@UAEJPAVBMessage@@@Z)
+8000186e 00000006 .text    $         libbe.so(?DispatchMessage@BApplication@@UAEXPAVBMessage@@PAVBHandler@@@Z)
+80001874 00000006 .text    $         libbe.so(?ResolveSpecifier@BApplication@@UAEPAVBHandler@@PAVBMessage@@J0JPBD@Z)
+8000187a 00000006 .text    $         libbe.so(?AboutRequested@BApplication@@UAEXXZ)
+80001880 00000006 .text    $         libbe.so(?RefsReceived@BApplication@@UAEXPAVBMessage@@@Z)
+80001886 00000006 .text    $         libbe.so(?AppActivated@BApplication@@UAEX_N@Z)
+8000188c 00000006 .text    $         libbe.so(?Pulse@BApplication@@UAEXXZ)
+80001892 00000006 .text    $         libbe.so(?QuitRequested@BApplication@@UAE_NXZ)
+80001898 00000006 .text    $         libbe.so(?Quit@BApplication@@UAEXXZ)
+8000189e 00000006 .text    $         libbe.so(?Run@BApplication@@UAEJXZ)
+800018a4 00000006 .text    $         libbe.so(?Archive@BApplication@@UBEJPAVBMessage@@_N@Z)
+800018aa 00000006 .text    $         libroot.so(___destroy_new_array)
+800018b0 00000009 .text    $         runinit.o(__GLUEarea_for_)
+800018b9 00000009 .text    $         runinit.o(__GLUE_get_area_info_)
+800018c2 0000004b .text    $         runinit.o(__Runinit)
+8000190d 00000027 .text    $         global_destructor_chain.o(___destroy_global_chain)
+80001934 00000006 .text    $         libroot.so(__kget_thread_stacks_)
+8000193a 00000000 .text    $         cinit.o
+8000193a 0000000c .text    $         CPlusGlue.o(_DTORCALL_COMPLETE)
+80002000 00000000 .bss     $         cinit.o
+80002000 00000004 .bss               
+80003000 00000000 .exc     $AAA      cexc.o
+80003000 00000008 .exc     $BBB      MakeResMain.o
+80003008 00000008 .exc     $BBB      MakeResApp.o
+80003010 00000008 .exc     $BBB      MakeResApp.o
+80003018 00000008 .exc     $BBB      MakeResApp.o
+80003020 00000008 .exc     $BBB      MakeResApp.o
+80003028 00000008 .exc     $BBB      MakeResApp.o
+80003030 00000008 .exc     $BBB      MakeResApp.o
+80003038 00000008 .exc     $BBB      MakeResApp.o
+80003040 00000008 .exc     $BBB      MakeResApp.o
+80003048 00000008 .exc     $BBB      MakeResApp.o
+80003050 00000008 .exc     $BBB      kgAlert.o
+80003058 00000008 .exc     $BBB      kgDebug.o
+80003060 00000008 .exc     $BBB      init_term_dyn.o
+80003068 00000008 .exc     $BBB      init_term_dyn.o
+80003070 00000008 .exc     $BBB      start_dyn.o
+80003078 00000008 .exc     $BBB      runinit.o
+80003080 00000008 .exc     $BBB      runinit.o
+80003088 00000008 .exc     $BBB      runinit.o
+80003090 00000008 .exc     $BBB      global_destructor_chain.o
+80003098 00000008 .exc     $BBB      CPlusGlue.o
+800030a0 00000004 .exc     $CCC      cexc.o
+80004000 000002f8 .data    $         MakeResApp.o
+800042f8 00000015 .data    $         kgAlert.o
+80004310 00000058 .data    $         kgDebug.o
+80004368 0000000c .data    $         init_term_dyn.o
+80004378 00000020 .data    $         start_dyn.o
+80004398 00000000 .data    $         cinit.o
+80005000 00000014 .idata   $2        libbe.so
+80005014 00000014 .idata   $2        libroot.so
+80005028 00000014 .idata   $2        libtracker.so
+8000503c 00000014 .idata   $3        libroot.so
+80005050 00000004 .idata   $4        libbe.so
+80005054 00000004 .idata   $4        libbe.so
+80005058 00000004 .idata   $4        libbe.so
+8000505c 00000004 .idata   $4        libbe.so
+80005060 00000004 .idata   $4        libbe.so
+80005064 00000004 .idata   $4        libbe.so
+80005068 00000004 .idata   $4        libbe.so
+8000506c 00000004 .idata   $4        libbe.so
+80005070 00000004 .idata   $4        libbe.so
+80005074 00000004 .idata   $4        libbe.so
+80005078 00000004 .idata   $4        libbe.so
+8000507c 00000004 .idata   $4        libbe.so
+80005080 00000004 .idata   $4        libbe.so
+80005084 00000004 .idata   $4        libbe.so
+80005088 00000004 .idata   $4        libbe.so
+8000508c 00000004 .idata   $4        libbe.so
+80005090 00000004 .idata   $4        libbe.so
+80005094 00000004 .idata   $4        libbe.so
+80005098 00000004 .idata   $4        libbe.so
+8000509c 00000004 .idata   $4        libbe.so
+800050a0 00000004 .idata   $4        libbe.so
+800050a4 00000004 .idata   $4        libbe.so
+800050a8 00000004 .idata   $4        libbe.so
+800050ac 00000004 .idata   $4        libbe.so
+800050b0 00000004 .idata   $4        libbe.so
+800050b4 00000004 .idata   $4        libbe.so
+800050b8 00000004 .idata   $4        libbe.so
+800050bc 00000004 .idata   $4        libbe.so
+800050c0 00000004 .idata   $4        libbe.so
+800050c4 00000004 .idata   $4        libbe.so
+800050c8 00000004 .idata   $4        libbe.so
+800050cc 00000004 .idata   $4        libbe.so
+800050d0 00000004 .idata   $4        libbe.so
+800050d4 00000004 .idata   $4        libbe.so
+800050d8 00000004 .idata   $4        libbe.so
+800050dc 00000004 .idata   $4        libbe.so
+800050e0 00000004 .idata   $4        libbe.so
+800050e4 00000004 .idata   $4        libbe.so
+800050e8 00000004 .idata   $4        libbe.so
+800050ec 00000004 .idata   $4        libbe.so
+800050f0 00000004 .idata   $4        libbe.so
+800050f4 00000004 .idata   $4        libbe.so
+800050f8 00000004 .idata   $4        libbe.so
+800050fc 00000004 .idata   $4        libbe.so
+80005100 00000004 .idata   $4        libbe.so
+80005104 00000004 .idata   $4        libbe.so
+80005108 00000004 .idata   $4        libbe.so
+8000510c 00000004 .idata   $4        libbe.so
+80005110 00000004 .idata   $4        libbe.so
+80005114 00000004 .idata   $4        libbe.so
+80005118 00000004 .idata   $4        libbe.so
+8000511c 00000004 .idata   $4        libbe.so
+80005120 00000004 .idata   $4        libbe.so
+80005124 00000004 .idata   $4        libbe.so
+80005128 00000004 .idata   $4        libbe.so
+8000512c 00000004 .idata   $4        libbe.so
+80005130 00000004 .idata   $4        libbe.so
+80005134 00000004 .idata   $4        libbe.so
+80005138 00000004 .idata   $4        libbe.so
+8000513c 00000004 .idata   $4        libbe.so
+80005140 00000004 .idata   $4        libbe.so
+80005144 00000004 .idata   $4        libbe.so
+80005148 00000004 .idata   $4        libbe.so
+8000514c 00000004 .idata   $4        libbe.so
+80005150 00000004 .idata   $4        libbe.so
+80005154 00000004 .idata   $4        libbe.so
+80005158 00000004 .idata   $4        libbe.so
+8000515c 00000004 .idata   $4        libbe.so
+80005160 00000004 .idata   $4        libbe.so
+80005164 00000004 .idata   $4        libbe.so
+80005168 00000004 .idata   $4        libbe.so
+8000516c 00000004 .idata   $4        libbe.so
+80005170 00000004 .idata   $4        libbe.so
+80005174 00000004 .idata   $4        libbe.so
+80005178 00000004 .idata   $4        libbe.so
+8000517c 00000004 .idata   $4        libroot.so
+80005180 00000004 .idata   $4        libroot.so
+80005184 00000004 .idata   $4        libroot.so
+80005188 00000004 .idata   $4        libroot.so
+8000518c 00000004 .idata   $4        libroot.so
+80005190 00000004 .idata   $4        libroot.so
+80005194 00000004 .idata   $4        libroot.so
+80005198 00000004 .idata   $4        libroot.so
+8000519c 00000004 .idata   $4        libroot.so
+800051a0 00000004 .idata   $4        libroot.so
+800051a4 00000004 .idata   $4        libroot.so
+800051a8 00000004 .idata   $4        libroot.so
+800051ac 00000004 .idata   $4        libroot.so
+800051b0 00000004 .idata   $4        libroot.so
+800051b4 00000004 .idata   $4        libroot.so
+800051b8 00000004 .idata   $4        libroot.so
+800051bc 00000004 .idata   $4        libroot.so
+800051c0 00000004 .idata   $4        libroot.so
+800051c4 00000004 .idata   $4        libtracker.so
+800051c8 00000004 .idata   $4        libtracker.so
+800051cc 00000004 .idata   $4        libtracker.so
+800051d0 00000004 .idata   $4        libtracker.so
+800051d4 00000004 .idata   $5        libbe.so(__imp_??0entry_ref@@QAE@XZ)
+800051d8 00000004 .idata   $5        libbe.so(__imp_?get_ref_for_path@@YAJPBDPAUentry_ref@@@Z)
+800051dc 00000004 .idata   $5        libbe.so(__imp_??1entry_ref@@QAE@XZ)
+800051e0 00000004 .idata   $5        libbe.so(__imp_?PostMessage@BLooper@@QAEJKPAVBHandler@@0@Z)
+800051e4 00000004 .idata   $5        libbe.so(__imp_?MessageReceived@BApplication@@UAEXPAVBMessage@@@Z)
+800051e8 00000004 .idata   $5        libbe.so(__imp_??0BDirectory@@QAE@XZ)
+800051ec 00000004 .idata   $5        libbe.so(__imp_??0BEntry@@QAE@XZ)
+800051f0 00000004 .idata   $5        libbe.so(__imp_?FindRef@BMessage@@QBEJPBDPAUentry_ref@@@Z)
+800051f4 00000004 .idata   $5        libbe.so(__imp_?FindString@BMessage@@QBEJPBDPAPBD@Z)
+800051f8 00000004 .idata   $5        libbe.so(__imp_?SetTo@BDirectory@@QAEJPBUentry_ref@@@Z)
+800051fc 00000004 .idata   $5        libbe.so(__imp_?SetTo@BEntry@@QAEJPBVBDirectory@@PBD_N@Z)
+80005200 00000004 .idata   $5        libbe.so(__imp_?GetRef@BEntry@@QBEJPAUentry_ref@@@Z)
+80005204 00000004 .idata   $5        libbe.so(__imp_??1BEntry@@UAE@XZ)
+80005208 00000004 .idata   $5        libbe.so(__imp_??1BDirectory@@UAE@XZ)
+8000520c 00000004 .idata   $5        libbe.so(__imp_??0BFile@@QAE@XZ)
+80005210 00000004 .idata   $5        libbe.so(__imp_?SetTo@BFile@@QAEJPBUentry_ref@@K@Z)
+80005214 00000004 .idata   $5        libbe.so(__imp_??0BEntry@@QAE@PBUentry_ref@@_N@Z)
+80005218 00000004 .idata   $5        libbe.so(__imp_?Remove@BEntry@@QAEJXZ)
+8000521c 00000004 .idata   $5        libbe.so(__imp_?Unset@BNode@@QAEXXZ)
+80005220 00000004 .idata   $5        libbe.so(__imp_??0BResources@@QAE@XZ)
+80005224 00000004 .idata   $5        libbe.so(__imp_??1BResources@@UAE@XZ)
+80005228 00000004 .idata   $5        libbe.so(__imp_?SetTo@BResources@@QAEJPBVBFile@@_N@Z)
+8000522c 00000004 .idata   $5        libbe.so(__imp_??1BFile@@UAE@XZ)
+80005230 00000004 .idata   $5        libbe.so(__imp_?Lock@BLooper@@QAE_NXZ)
+80005234 00000004 .idata   $5        libbe.so(__imp_?FindView@BWindow@@QBEPAVBView@@PBD@Z)
+80005238 00000004 .idata   $5        libbe.so(__imp_?Unlock@BLooper@@QAEXXZ)
+8000523c 00000004 .idata   $5        libbe.so(__imp_??0BApplication@@QAE@PBD@Z)
+80005240 00000004 .idata   $5        libbe.so(__imp_??1BApplication@@UAE@XZ)
+80005244 00000004 .idata   $5        libbe.so(__imp_?_ReservedArchivable3@BArchivable@@EAEXXZ)
+80005248 00000004 .idata   $5        libbe.so(__imp_?_ReservedArchivable2@BArchivable@@EAEXXZ)
+8000524c 00000004 .idata   $5        libbe.so(__imp_?_ReservedArchivable1@BArchivable@@EAEXXZ)
+80005250 00000004 .idata   $5        libbe.so(__imp_?_ReservedHandler4@BHandler@@EAEXXZ)
+80005254 00000004 .idata   $5        libbe.so(__imp_?_ReservedHandler3@BHandler@@EAEXXZ)
+80005258 00000004 .idata   $5        libbe.so(__imp_?_ReservedHandler2@BHandler@@EAEXXZ)
+8000525c 00000004 .idata   $5        libbe.so(__imp_?_ReservedHandler1@BHandler@@EAEXXZ)
+80005260 00000004 .idata   $5        libbe.so(__imp_?SetFilterList@BHandler@@UAEXPAVBList@@@Z)
+80005264 00000004 .idata   $5        libbe.so(__imp_?RemoveFilter@BHandler@@UAE_NPAVBMessageFilter@@@Z)
+80005268 00000004 .idata   $5        libbe.so(__imp_?AddFilter@BHandler@@UAEXPAVBMessageFilter@@@Z)
+8000526c 00000004 .idata   $5        libbe.so(__imp_?SetNextHandler@BHandler@@UAEXPAV1@@Z)
+80005270 00000004 .idata   $5        libbe.so(__imp_?task_looper@BLooper@@EAEXXZ)
+80005274 00000004 .idata   $5        libbe.so(__imp_?ConvertToMessage@BLooper@@EAEPAVBMessage@@PAXJ@Z)
+80005278 00000004 .idata   $5        libbe.so(__imp_?_ReservedLooper6@BLooper@@EAEXXZ)
+8000527c 00000004 .idata   $5        libbe.so(__imp_?_ReservedLooper5@BLooper@@EAEXXZ)
+80005280 00000004 .idata   $5        libbe.so(__imp_?_ReservedLooper4@BLooper@@EAEXXZ)
+80005284 00000004 .idata   $5        libbe.so(__imp_?_ReservedLooper3@BLooper@@EAEXXZ)
+80005288 00000004 .idata   $5        libbe.so(__imp_?_ReservedLooper2@BLooper@@EAEXXZ)
+8000528c 00000004 .idata   $5        libbe.so(__imp_?_ReservedLooper1@BLooper@@EAEXXZ)
+80005290 00000004 .idata   $5        libbe.so(__imp_?SetCommonFilterList@BLooper@@UAEXPAVBList@@@Z)
+80005294 00000004 .idata   $5        libbe.so(__imp_?RemoveCommonFilter@BLooper@@UAE_NPAVBMessageFilter@@@Z)
+80005298 00000004 .idata   $5        libbe.so(__imp_?AddCommonFilter@BLooper@@UAEXPAVBMessageFilter@@@Z)
+8000529c 00000004 .idata   $5        libbe.so(__imp_?ScriptReceived@BApplication@@EAE_NPAVBMessage@@J0JPBD@Z)
+800052a0 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication8@BApplication@@EAEXXZ)
+800052a4 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication7@BApplication@@EAEXXZ)
+800052a8 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication6@BApplication@@EAEXXZ)
+800052ac 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication5@BApplication@@EAEXXZ)
+800052b0 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication4@BApplication@@EAEXXZ)
+800052b4 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication3@BApplication@@EAEXXZ)
+800052b8 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication2@BApplication@@EAEXXZ)
+800052bc 00000004 .idata   $5        libbe.so(__imp_?_ReservedApplication1@BApplication@@EAEXXZ)
+800052c0 00000004 .idata   $5        libbe.so(__imp_?Perform@BApplication@@UAEJKPAX@Z)
+800052c4 00000004 .idata   $5        libbe.so(__imp_?GetSupportedSuites@BApplication@@UAEJPAVBMessage@@@Z)
+800052c8 00000004 .idata   $5        libbe.so(__imp_?DispatchMessage@BApplication@@UAEXPAVBMessage@@PAVBHandler@@@Z)
+800052cc 00000004 .idata   $5        libbe.so(__imp_?ResolveSpecifier@BApplication@@UAEPAVBHandler@@PAVBMessage@@J0JPBD@Z)
+800052d0 00000004 .idata   $5        libbe.so(__imp_?AboutRequested@BApplication@@UAEXXZ)
+800052d4 00000004 .idata   $5        libbe.so(__imp_?RefsReceived@BApplication@@UAEXPAVBMessage@@@Z)
+800052d8 00000004 .idata   $5        libbe.so(__imp_?AppActivated@BApplication@@UAEX_N@Z)
+800052dc 00000004 .idata   $5        libbe.so(__imp_?Pulse@BApplication@@UAEXXZ)
+800052e0 00000004 .idata   $5        libbe.so(__imp_?QuitRequested@BApplication@@UAE_NXZ)
+800052e4 00000004 .idata   $5        libbe.so(__imp_?Quit@BApplication@@UAEXXZ)
+800052e8 00000004 .idata   $5        libbe.so(__imp_?Run@BApplication@@UAEJXZ)
+800052ec 00000004 .idata   $5        libbe.so(__imp_?Archive@BApplication@@UBEJPAVBMessage@@_N@Z)
+800052f0 00000004 .idata   $5        libbe.so(__imp_?beep@@YAJXZ)
+800052f4 00000004 .idata   $5        libbe.so(__imp_??0BAlert@@QAE@PBD0000W4button_width@@W4alert_type@@@Z)
+800052f8 00000004 .idata   $5        libbe.so(__imp_?Go@BAlert@@QAEJXZ)
+800052fc 00000004 .idata   $5        libbe.so
+80005300 00000004 .idata   $5        libroot.so(__imp__printf)
+80005304 00000004 .idata   $5        libroot.so(__imp__exit)
+80005308 00000004 .idata   $5        libroot.so(__imp_??2@YAPAXK@Z)
+8000530c 00000004 .idata   $5        libroot.so(__imp____dynamic_cast)
+80005310 00000004 .idata   $5        libroot.so(__imp_??3@YAXPAX@Z)
+80005314 00000004 .idata   $5        libroot.so(__imp____destroy_new_array)
+80005318 00000004 .idata   $5        libroot.so(__imp__sprintf)
+8000531c 00000004 .idata   $5        libroot.so(__imp___RegisterExceptionTables)
+80005320 00000004 .idata   $5        libroot.so(__imp___UnRegisterExceptionTables)
+80005324 00000004 .idata   $5        libroot.so(__imp__argv_save)
+80005328 00000004 .idata   $5        libroot.so(__imp__environ)
+8000532c 00000004 .idata   $5        libroot.so(__imp__find_thread)
+80005330 00000004 .idata   $5        libroot.so(__imp____main_thread_id)
+80005334 00000004 .idata   $5        libroot.so(__imp___kget_thread_stacks_)
+80005338 00000004 .idata   $5        libroot.so(__imp___data_offset_main_)
+8000533c 00000004 .idata   $5        libroot.so(__imp___call_init_routines_)
+80005340 00000004 .idata   $5        libroot.so(__imp___thread_do_exit_notification)
+80005344 00000004 .idata   $5        libroot.so
+80005348 00000004 .idata   $5        libtracker.so(__imp_??0BFilePanel@@QAE@W4file_panel_mode@@PAVBMessenger@@PAUentry_ref@@K_NPAVBMessage@@PAVBRefFilter@@_N_N@Z)
+8000534c 00000004 .idata   $5        libtracker.so(__imp_?Window@BFilePanel@@QBEPAVBWindow@@XZ)
+80005350 00000004 .idata   $5        libtracker.so(__imp_?Show@BFilePanel@@QAEXXZ)
+80005354 00000004 .idata   $5        libtracker.so
+80005358 00000018 .idata   $6        libbe.so
+80005370 0000002d .idata   $6        libbe.so
+8000539e 00000018 .idata   $6        libbe.so
+800053b6 0000002f .idata   $6        libbe.so
+800053e6 00000036 .idata   $6        libbe.so
+8000541c 00000019 .idata   $6        libbe.so
+80005436 00000015 .idata   $6        libbe.so
+8000544c 0000002e .idata   $6        libbe.so
+8000547a 00000028 .idata   $6        libbe.so
+800054a2 0000002b .idata   $6        libbe.so
+800054ce 0000002d .idata   $6        libbe.so
+800054fc 00000028 .idata   $6        libbe.so
+80005524 00000015 .idata   $6        libbe.so
+8000553a 00000019 .idata   $6        libbe.so
+80005554 00000014 .idata   $6        libbe.so
+80005568 00000027 .idata   $6        libbe.so
+80005590 00000025 .idata   $6        libbe.so
+800055b6 0000001a .idata   $6        libbe.so
+800055d0 00000018 .idata   $6        libbe.so
+800055e8 00000019 .idata   $6        libbe.so
+80005602 00000019 .idata   $6        libbe.so
+8000561c 00000029 .idata   $6        libbe.so
+80005646 00000014 .idata   $6        libbe.so
+8000565a 0000001a .idata   $6        libbe.so
+80005674 00000029 .idata   $6        libbe.so
+8000569e 0000001b .idata   $6        libbe.so
+800056ba 0000001e .idata   $6        libbe.so
+800056d8 0000001b .idata   $6        libbe.so
+800056f4 0000002d .idata   $6        libbe.so
+80005722 0000002d .idata   $6        libbe.so
+80005750 0000002d .idata   $6        libbe.so
+8000577e 00000027 .idata   $6        libbe.so
+800057a6 00000027 .idata   $6        libbe.so
+800057ce 00000027 .idata   $6        libbe.so
+800057f6 00000027 .idata   $6        libbe.so
+8000581e 0000002d .idata   $6        libbe.so
+8000584c 00000036 .idata   $6        libbe.so
+80005882 00000032 .idata   $6        libbe.so
+800058b4 00000029 .idata   $6        libbe.so
+800058de 00000020 .idata   $6        libbe.so
+800058fe 00000035 .idata   $6        libbe.so
+80005934 00000025 .idata   $6        libbe.so
+8000595a 00000025 .idata   $6        libbe.so
+80005980 00000025 .idata   $6        libbe.so
+800059a6 00000025 .idata   $6        libbe.so
+800059cc 00000025 .idata   $6        libbe.so
+800059f2 00000025 .idata   $6        libbe.so
+80005a18 00000032 .idata   $6        libbe.so
+80005a4a 0000003b .idata   $6        libbe.so
+80005a86 00000037 .idata   $6        libbe.so
+80005abe 0000003c .idata   $6        libbe.so
+80005afa 0000002f .idata   $6        libbe.so
+80005b2a 0000002f .idata   $6        libbe.so
+80005b5a 0000002f .idata   $6        libbe.so
+80005b8a 0000002f .idata   $6        libbe.so
+80005bba 0000002f .idata   $6        libbe.so
+80005bea 0000002f .idata   $6        libbe.so
+80005c1a 0000002f .idata   $6        libbe.so
+80005c4a 0000002f .idata   $6        libbe.so
+80005c7a 00000025 .idata   $6        libbe.so
+80005ca0 00000039 .idata   $6        libbe.so
+80005cda 00000043 .idata   $6        libbe.so
+80005d1e 00000049 .idata   $6        libbe.so
+80005d68 00000028 .idata   $6        libbe.so
+80005d90 00000033 .idata   $6        libbe.so
+80005dc4 00000028 .idata   $6        libbe.so
+80005dec 0000001f .idata   $6        libbe.so
+80005e0c 00000028 .idata   $6        libbe.so
+80005e34 0000001e .idata   $6        libbe.so
+80005e52 0000001d .idata   $6        libbe.so
+80005e70 00000030 .idata   $6        libbe.so
+80005ea0 00000010 .idata   $6        libbe.so
+80005eb0 0000003a .idata   $6        libbe.so
+80005eea 00000016 .idata   $6        libbe.so
+80005f00 00000009 .idata   $6        libbe.so
+80005f0a 0000000a .idata   $6        libroot.so
+80005f14 00000008 .idata   $6        libroot.so
+80005f1c 00000010 .idata   $6        libroot.so
+80005f2c 00000012 .idata   $6        libroot.so
+80005f3e 00000010 .idata   $6        libroot.so
+80005f4e 00000017 .idata   $6        libroot.so
+80005f66 0000000b .idata   $6        libroot.so
+80005f72 0000001c .idata   $6        libroot.so
+80005f8e 0000001e .idata   $6        libroot.so
+80005fac 0000000d .idata   $6        libroot.so
+80005fba 0000000b .idata   $6        libroot.so
+80005fc6 0000000f .idata   $6        libroot.so
+80005fd6 00000014 .idata   $6        libroot.so
+80005fea 00000018 .idata   $6        libroot.so
+80006002 00000016 .idata   $6        libroot.so
+80006018 00000018 .idata   $6        libroot.so
+80006030 00000020 .idata   $6        libroot.so
+80006050 0000000b .idata   $6        libroot.so
+8000605c 0000006c .idata   $6        libtracker.so
+800060c8 00000029 .idata   $6        libtracker.so
+800060f2 0000001c .idata   $6        libtracker.so
+8000610e 0000000e .idata   $6        libtracker.so
+
+Public symbols
+
+Address  Name                             Module
+
+80000000 ___xc_a                          cinit.o
+80000004 ___xc_z                          cinit.o
+80001000 _main                            MakeResMain.o
+80001051 ?ArgvReceived@MakeResApp@@EAEXJPAPAD@Z MakeResApp.o
+80001108 ?ReadyToRun@MakeResApp@@EAEXXZ   MakeResApp.o
+80001138 ?MessageReceived@MakeResApp@@EAEXPAVBMessage@@@Z MakeResApp.o
+80001188 ?SaveRequested@MakeResApp@@AAEXPAVBMessage@@@Z MakeResApp.o
+80001324 ?MakeResFile@MakeResApp@@AAEJABUentry_ref@@_N@Z MakeResApp.o
+800014b0 ?OpenSavePanel@MakeResApp@@AAEXXZ MakeResApp.o
+8000156f ??0MakeResApp@@QAE@XZ            MakeResApp.o
+80001599 ??1MakeResApp@@UAE@XZ            MakeResApp.o
+800015b4 ??_EMakeResApp@@UAE@I@Z          MakeResApp.o
+80001602 ?KGAlert@@YAXPBD@Z               kgAlert.o
+80001665 ?Error@@YAXPBDJ@Z                kgDebug.o
+8000169b __init_routine_                  init_term_dyn.o
+800016b4 __term_routine_                  init_term_dyn.o
+800016cd __start                          start_dyn.o
+80001778 ??1entry_ref@@QAE@XZ             libbe.so
+8000177e ??1BEntry@@UAE@XZ                libbe.so
+80001784 ??1BDirectory@@UAE@XZ            libbe.so
+8000178a ??1BResources@@UAE@XZ            libbe.so
+80001790 ??1BFile@@UAE@XZ                 libbe.so
+80001796 ??2@YAPAXK@Z                     libroot.so
+8000179c ___dynamic_cast                  libroot.so
+800017a2 ??3@YAXPAX@Z                     libroot.so
+800017a8 ?_ReservedArchivable3@BArchivable@@EAEXXZ libbe.so
+800017ae ?_ReservedArchivable2@BArchivable@@EAEXXZ libbe.so
+800017b4 ?_ReservedArchivable1@BArchivable@@EAEXXZ libbe.so
+800017ba ?_ReservedHandler4@BHandler@@EAEXXZ libbe.so
+800017c0 ?_ReservedHandler3@BHandler@@EAEXXZ libbe.so
+800017c6 ?_ReservedHandler2@BHandler@@EAEXXZ libbe.so
+800017cc ?_ReservedHandler1@BHandler@@EAEXXZ libbe.so
+800017d2 ?SetFilterList@BHandler@@UAEXPAVBList@@@Z libbe.so
+800017d8 ?RemoveFilter@BHandler@@UAE_NPAVBMessageFilter@@@Z libbe.so
+800017de ?AddFilter@BHandler@@UAEXPAVBMessageFilter@@@Z libbe.so
+800017e4 ?SetNextHandler@BHandler@@UAEXPAV1@@Z libbe.so
+800017ea ?task_looper@BLooper@@EAEXXZ     libbe.so
+800017f0 ?ConvertToMessage@BLooper@@EAEPAVBMessage@@PAXJ@Z libbe.so
+800017f6 ?_ReservedLooper6@BLooper@@EAEXXZ libbe.so
+800017fc ?_ReservedLooper5@BLooper@@EAEXXZ libbe.so
+80001802 ?_ReservedLooper4@BLooper@@EAEXXZ libbe.so
+80001808 ?_ReservedLooper3@BLooper@@EAEXXZ libbe.so
+8000180e ?_ReservedLooper2@BLooper@@EAEXXZ libbe.so
+80001814 ?_ReservedLooper1@BLooper@@EAEXXZ libbe.so
+8000181a ?SetCommonFilterList@BLooper@@UAEXPAVBList@@@Z libbe.so
+80001820 ?RemoveCommonFilter@BLooper@@UAE_NPAVBMessageFilter@@@Z libbe.so
+80001826 ?AddCommonFilter@BLooper@@UAEXPAVBMessageFilter@@@Z libbe.so
+8000182c ?ScriptReceived@BApplication@@EAE_NPAVBMessage@@J0JPBD@Z libbe.so
+80001832 ?_ReservedApplication8@BApplication@@EAEXXZ libbe.so
+80001838 ?_ReservedApplication7@BApplication@@EAEXXZ libbe.so
+8000183e ?_ReservedApplication6@BApplication@@EAEXXZ libbe.so
+80001844 ?_ReservedApplication5@BApplication@@EAEXXZ libbe.so
+8000184a ?_ReservedApplication4@BApplication@@EAEXXZ libbe.so
+80001850 ?_ReservedApplication3@BApplication@@EAEXXZ libbe.so
+80001856 ?_ReservedApplication2@BApplication@@EAEXXZ libbe.so
+8000185c ?_ReservedApplication1@BApplication@@EAEXXZ libbe.so
+80001862 ?Perform@BApplication@@UAEJKPAX@Z libbe.so
+80001868 ?GetSupportedSuites@BApplication@@UAEJPAVBMessage@@@Z libbe.so
+8000186e ?DispatchMessage@BApplication@@UAEXPAVBMessage@@PAVBHandler@@@Z libbe.so
+80001874 ?ResolveSpecifier@BApplication@@UAEPAVBHandler@@PAVBMessage@@J0JPBD@Z libbe.so
+8000187a ?AboutRequested@BApplication@@UAEXXZ libbe.so
+80001880 ?RefsReceived@BApplication@@UAEXPAVBMessage@@@Z libbe.so
+80001886 ?AppActivated@BApplication@@UAEX_N@Z libbe.so
+8000188c ?Pulse@BApplication@@UAEXXZ      libbe.so
+80001892 ?QuitRequested@BApplication@@UAE_NXZ libbe.so
+80001898 ?Quit@BApplication@@UAEXXZ       libbe.so
+8000189e ?Run@BApplication@@UAEJXZ        libbe.so
+800018a4 ?Archive@BApplication@@UBEJPAVBMessage@@_N@Z libbe.so
+800018aa ___destroy_new_array             libroot.so
+800018c2 __Runinit                        runinit.o
+8000190d ___destroy_global_chain          global_destructor_chain.o
+80001934 __kget_thread_stacks_            libroot.so
+8000193a _DTORCALL_COMPLETE               CPlusGlue.o
+80002000 ___global_destructor_chain       common
+80003000 __PcToActionStart                cexc.o
+800030a0 __PcToActionEnd                  cexc.o
+80004234 ??_7MakeResApp@@6B@              MakeResApp.o
+80005000 libbe_IMPORT_DESCRIPTOR          libbe.so
+80005014 libroot_IMPORT_DESCRIPTOR        libroot.so
+80005028 libtracker_IMPORT_DESCRIPTOR     libtracker.so
+8000503c NULL_IMPORT_DESCRIPTOR           libroot.so
+800051d4 __imp_??0entry_ref@@QAE@XZ       libbe.so
+800051d8 __imp_?get_ref_for_path@@YAJPBDPAUentry_ref@@@Z libbe.so
+800051dc __imp_??1entry_ref@@QAE@XZ       libbe.so
+800051e0 __imp_?PostMessage@BLooper@@QAEJKPAVBHandler@@0@Z libbe.so
+800051e4 __imp_?MessageReceived@BApplication@@UAEXPAVBMessage@@@Z libbe.so
+800051e8 __imp_??0BDirectory@@QAE@XZ      libbe.so
+800051ec __imp_??0BEntry@@QAE@XZ          libbe.so
+800051f0 __imp_?FindRef@BMessage@@QBEJPBDPAUentry_ref@@@Z libbe.so
+800051f4 __imp_?FindString@BMessage@@QBEJPBDPAPBD@Z libbe.so
+800051f8 __imp_?SetTo@BDirectory@@QAEJPBUentry_ref@@@Z libbe.so
+800051fc __imp_?SetTo@BEntry@@QAEJPBVBDirectory@@PBD_N@Z libbe.so
+80005200 __imp_?GetRef@BEntry@@QBEJPAUentry_ref@@@Z libbe.so
+80005204 __imp_??1BEntry@@UAE@XZ          libbe.so
+80005208 __imp_??1BDirectory@@UAE@XZ      libbe.so
+8000520c __imp_??0BFile@@QAE@XZ           libbe.so
+80005210 __imp_?SetTo@BFile@@QAEJPBUentry_ref@@K@Z libbe.so
+80005214 __imp_??0BEntry@@QAE@PBUentry_ref@@_N@Z libbe.so
+80005218 __imp_?Remove@BEntry@@QAEJXZ     libbe.so
+8000521c __imp_?Unset@BNode@@QAEXXZ       libbe.so
+80005220 __imp_??0BResources@@QAE@XZ      libbe.so
+80005224 __imp_??1BResources@@UAE@XZ      libbe.so
+80005228 __imp_?SetTo@BResources@@QAEJPBVBFile@@_N@Z libbe.so
+8000522c __imp_??1BFile@@UAE@XZ           libbe.so
+80005230 __imp_?Lock@BLooper@@QAE_NXZ     libbe.so
+80005234 __imp_?FindView@BWindow@@QBEPAVBView@@PBD@Z libbe.so
+80005238 __imp_?Unlock@BLooper@@QAEXXZ    libbe.so
+8000523c __imp_??0BApplication@@QAE@PBD@Z libbe.so
+80005240 __imp_??1BApplication@@UAE@XZ    libbe.so
+80005244 __imp_?_ReservedArchivable3@BArchivable@@EAEXXZ libbe.so
+80005248 __imp_?_ReservedArchivable2@BArchivable@@EAEXXZ libbe.so
+8000524c __imp_?_ReservedArchivable1@BArchivable@@EAEXXZ libbe.so
+80005250 __imp_?_ReservedHandler4@BHandler@@EAEXXZ libbe.so
+80005254 __imp_?_ReservedHandler3@BHandler@@EAEXXZ libbe.so
+80005258 __imp_?_ReservedHandler2@BHandler@@EAEXXZ libbe.so
+8000525c __imp_?_ReservedHandler1@BHandler@@EAEXXZ libbe.so
+80005260 __imp_?SetFilterList@BHandler@@UAEXPAVBList@@@Z libbe.so
+80005264 __imp_?RemoveFilter@BHandler@@UAE_NPAVBMessageFilter@@@Z libbe.so
+80005268 __imp_?AddFilter@BHandler@@UAEXPAVBMessageFilter@@@Z libbe.so
+8000526c __imp_?SetNextHandler@BHandler@@UAEXPAV1@@Z libbe.so
+80005270 __imp_?task_looper@BLooper@@EAEXXZ libbe.so
+80005274 __imp_?ConvertToMessage@BLooper@@EAEPAVBMessage@@PAXJ@Z libbe.so
+80005278 __imp_?_ReservedLooper6@BLooper@@EAEXXZ libbe.so
+8000527c __imp_?_ReservedLooper5@BLooper@@EAEXXZ libbe.so
+80005280 __imp_?_ReservedLooper4@BLooper@@EAEXXZ libbe.so
+80005284 __imp_?_ReservedLooper3@BLooper@@EAEXXZ libbe.so
+80005288 __imp_?_ReservedLooper2@BLooper@@EAEXXZ libbe.so
+8000528c __imp_?_ReservedLooper1@BLooper@@EAEXXZ libbe.so
+80005290 __imp_?SetCommonFilterList@BLooper@@UAEXPAVBList@@@Z libbe.so
+80005294 __imp_?RemoveCommonFilter@BLooper@@UAE_NPAVBMessageFilter@@@Z libbe.so
+80005298 __imp_?AddCommonFilter@BLooper@@UAEXPAVBMessageFilter@@@Z libbe.so
+8000529c __imp_?ScriptReceived@BApplication@@EAE_NPAVBMessage@@J0JPBD@Z libbe.so
+800052a0 __imp_?_ReservedApplication8@BApplication@@EAEXXZ libbe.so
+800052a4 __imp_?_ReservedApplication7@BApplication@@EAEXXZ libbe.so
+800052a8 __imp_?_ReservedApplication6@BApplication@@EAEXXZ libbe.so
+800052ac __imp_?_ReservedApplication5@BApplication@@EAEXXZ libbe.so
+800052b0 __imp_?_ReservedApplication4@BApplication@@EAEXXZ libbe.so
+800052b4 __imp_?_ReservedApplication3@BApplication@@EAEXXZ libbe.so
+800052b8 __imp_?_ReservedApplication2@BApplication@@EAEXXZ libbe.so
+800052bc __imp_?_ReservedApplication1@BApplication@@EAEXXZ libbe.so
+800052c0 __imp_?Perform@BApplication@@UAEJKPAX@Z libbe.so
+800052c4 __imp_?GetSupportedSuites@BApplication@@UAEJPAVBMessage@@@Z libbe.so
+800052c8 __imp_?DispatchMessage@BApplication@@UAEXPAVBMessage@@PAVBHandler@@@Z libbe.so
+800052cc __imp_?ResolveSpecifier@BApplication@@UAEPAVBHandler@@PAVBMessage@@J0JPBD@Z libbe.so
+800052d0 __imp_?AboutRequested@BApplication@@UAEXXZ libbe.so
+800052d4 __imp_?RefsReceived@BApplication@@UAEXPAVBMessage@@@Z libbe.so
+800052d8 __imp_?AppActivated@BApplication@@UAEX_N@Z libbe.so
+800052dc __imp_?Pulse@BApplication@@UAEXXZ libbe.so
+800052e0 __imp_?QuitRequested@BApplication@@UAE_NXZ libbe.so
+800052e4 __imp_?Quit@BApplication@@UAEXXZ libbe.so
+800052e8 __imp_?Run@BApplication@@UAEJXZ  libbe.so
+800052ec __imp_?Archive@BApplication@@UBEJPAVBMessage@@_N@Z libbe.so
+800052f0 __imp_?beep@@YAJXZ               libbe.so
+800052f4 __imp_??0BAlert@@QAE@PBD0000W4button_width@@W4alert_type@@@Z libbe.so
+800052f8 __imp_?Go@BAlert@@QAEJXZ         libbe.so
+800052fc libbe_NULL_THUNK_DATA           libbe.so
+80005300 __imp__printf                    libroot.so
+80005304 __imp__exit                      libroot.so
+80005308 __imp_??2@YAPAXK@Z               libroot.so
+8000530c __imp____dynamic_cast            libroot.so
+80005310 __imp_??3@YAXPAX@Z               libroot.so
+80005314 __imp____destroy_new_array       libroot.so
+80005318 __imp__sprintf                   libroot.so
+8000531c __imp___RegisterExceptionTables  libroot.so
+80005320 __imp___UnRegisterExceptionTables libroot.so
+80005324 __imp__argv_save                 libroot.so
+80005328 __imp__environ                   libroot.so
+8000532c __imp__find_thread               libroot.so
+80005330 __imp____main_thread_id          libroot.so
+80005334 __imp___kget_thread_stacks_      libroot.so
+80005338 __imp___data_offset_main_        libroot.so
+8000533c __imp___call_init_routines_      libroot.so
+80005340 __imp___thread_do_exit_notification libroot.so
+80005344 libroot_NULL_THUNK_DATA         libroot.so
+80005348 __imp_??0BFilePanel@@QAE@W4file_panel_mode@@PAVBMessenger@@PAUentry_ref@@K_NPAVBMessage@@PAVBRefFilter@@_N_N@Z libtracker.so
+8000534c __imp_?Window@BFilePanel@@QBEPAVBWindow@@XZ libtracker.so
+80005350 __imp_?Show@BFilePanel@@QAEXXZ   libtracker.so
+80005354 libtracker_NULL_THUNK_DATA      libtracker.so

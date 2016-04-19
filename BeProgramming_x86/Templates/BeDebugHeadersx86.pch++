@@ -1,0 +1,12 @@
+/******************************************************************************
+//
+//	File:		BeHeadersx86.pch++
+//
+//	Copyright 1996-98, Be Incorporated
+//  Modified by koga@ftgun.co.jp ('98. 5/21)
+//
+*******************************************************************************/
+
+#define DEBUG	1  // added this line by koga@ftgun.co.jp
+
+#include <BeHeaders.pch++>

@@ -1,0 +1,735 @@
+/************************************************************************
+ * $Id$
+ * Copyright (c) 1998 Fort Gunnison, Inc.
+ *
+ * MemoWindow.cp: MemoWindowクラスの実装(改訂版-2)
+ *
+ * Author:		Shin'ya Koga (koga@ftgun.co.jp)
+ * Created:		May. 04, 1998
+ * Last update:	May. 16, 1998
+ ************************************************************************
+ */
+/*      #########################################################       */
+/*      #               I N C L U D E   F I L E S               #       */
+/*      #########################################################       */
+
+#include "MemoWindow.h"
+#include "MemoWindowMessages.h"
+#include "MyScrollView.h"
+#include "MyTextView.h"
+
+#include "GUI/MenuUtil.h"
+#include "KGUtility/kgDebug.h"
+
+#include <app/Application.h>
+#include <interface/Alert.h>
+#include <interface/Screen.h>
+#include <interface/ScrollBar.h>
+#include <interface/TextControl.h>
+#include <kernel/fs_attr.h>
+#include <storage/File.h>
+#include <storage/FilePanel.h>
+#include <storage/NodeInfo.h>
+#include <support/Autolock.h>
+#include <support/Debug.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+/*      #########################################################       */
+/*      #               L O C A L   D E F I N E S               #       */
+/*      #########################################################       */
+
+/* ビュー配置用の定数 */
+const float	kTextRectWidth	= 250;	/* テキスト表示幅の初期値 */
+const float	kPositionDelta	= 15;	/* ウィンドウ同士の距離 */
+
+
+/*      #########################################################       */
+/*      #               L O C A L   S T O R A G E               #       */
+/*      #########################################################       */
+
+/* 文字列定数 */
+const char	kTextViewName[]	= "content";
+const char	kSenderArg[]	= "sender";
+const char	kDirArg[]		= "directory";
+const char	kNameArg[]		= "name";
+const char	kSourceArg[]	= "source";
+
+/* MemoWindowのクラスデータ */
+BPoint	MemoWindow::sNextLeftTop	= BPoint(-1, -1);
+
+
+/*      #########################################################       */
+/*      #            P R I V A T E   F U N C T I O N S          #       */
+/*      #########################################################       */
+
+/*
+ * 内部手続き
+ */
+static void
+SaveStyleRunArray (BFile& inFile, BTextView* inTextView)
+{
+	text_run_array*	theRunArray;
+	void*			theData;
+	int32			theSize;
+
+	/* スタイル情報を取得してフラット化 */
+	theRunArray = inTextView->RunArray(0, inTextView->TextLength());
+	theData = BTextView::FlattenRunArray(theRunArray, &theSize);
+	
+	/* スタイル情報をノード属性として保存 */
+	(void)inFile.WriteAttr(
+//		"styles", 0x52415754, 0, theData, theSize
+		"styles",'RAWT', 0, theData, theSize
+	);
+	
+	/* 不要領域を解放 */
+	free(theData);
+	free(theRunArray);
+	
+	return;
+}
+
+static void
+LoadStyleRunArray (BFile& inFile, BTextView* inTextView)
+{
+	struct attr_info	theInfo;
+
+	/* スタイル情報のノード属性があればロード */
+	if (inFile.GetAttrInfo("styles", &theInfo) == B_OK) {
+		text_run_array*		theRunArray;
+		void*				theData = malloc(theInfo.size);
+
+		/* スタイル情報をロード */
+		(void)inFile.ReadAttr(
+			"styles", theInfo.type, 0, theData, theInfo.size
+		);
+		
+		/* フラット化を解除してテキストビューにセット */
+		theRunArray = BTextView::UnflattenRunArray(theData);
+		inTextView->SetRunArray(0, inTextView->TextLength(), theRunArray);
+		
+		/* 不要領域を解放 */
+		free(theRunArray);
+		free(theData);
+	}
+	
+	return;
+}
+
+
+/* MemoWindowクラスの非公開メソッド */
+/*
+ * テキストビューの取得; MemoWindow
+ */
+MyTextView*
+MemoWindow::GetTextView (void)
+{
+	MyTextView*	theTextView;
+	
+	theTextView = cast_as(this->FindView(kTextViewName), MyTextView);
+	ASSERT(theTextView != NULL);
+	
+	return theTextView;
+}
+
+/*
+ * メッセージ応答; MemoWindow
+ */
+void
+MemoWindow::MessageReceived (BMessage* message)
+{
+	switch (message->what) {
+	case B_SAVE_REQUESTED:
+		this->SaveRequested(message);		break;
+	case B_CANCEL:  /* QuitRequested()用 */
+		fInQuitting = false;				break;
+	case SAVE_DOC:
+		this->DoSave();						break;
+	case SAVE_DOC_AS:
+		this->ShowSavePanel();				break;
+	case EDIT_CLEAR:
+		this->DoClear();					break;
+	case SET_FONT_FAMILY:
+		this->SetFontFamily(message);		break;
+	case SET_FONT_STYLE:
+		this->SetFontStyle(message);		break;
+	case SET_SIZE:
+		this->SetFontSize(message);			break;
+	case ADJUST_WIDTH:
+		this->ToggleLineAdjust(message);	break;
+	default:
+		BWindow::MessageReceived(message);
+	}
+	
+	return;
+}
+
+/*
+ * テキストファイルの読み込みと保存; MemoWindow
+ */
+status_t
+MemoWindow::CreateDocument (const entry_ref& inRef)
+{
+	status_t	sts;
+	BFile		newFile;
+	BNodeInfo	newNodeInfo;
+
+	/* ファイルを新規作成 */	
+	sts = newFile.SetTo(&inRef, B_WRITE_ONLY|B_CREATE_FILE);
+	if (sts != B_OK)
+		goto err;  /* 作成に失敗 */	
+
+	/* ファイルタイプ属性を設定 */
+	sts = newNodeInfo.SetTo(&newFile);
+	if (sts != B_OK)
+		goto err;
+	sts = newNodeInfo.SetType("text/plain");
+	if (sts != B_OK)
+		goto err;
+	sts = newNodeInfo.SetPreferredApp(kMyAppSig);
+	if (sts != B_OK)
+		goto err;
+	
+	return B_OK;
+err:
+	::Error("MemoWindow::CreateDocument", sts);
+	return sts;
+}
+
+void
+MemoWindow::SaveDocumentTo (const entry_ref& inNewRef)
+{
+	status_t	sts;
+	BFile		myFile;
+	MyTextView*	theTextView = this->GetTextView();
+	
+	/* 必要なら保存先のファイルを作成 */
+	if (!fHasFile || inNewRef != fFileRef) {
+		BFile	oldFile;
+
+		/* 他のファイルを置き換える場合は、先に削除 */
+		if (oldFile.SetTo(&inNewRef, B_READ_ONLY) == B_OK) {
+			BEntry	theEntry(&inNewRef);
+			
+			sts = theEntry.Remove();
+			if (sts != B_OK)
+				goto err;  /* 削除に失敗 */
+			oldFile.Unset();
+		}
+		
+		/* 新しいファイルを作成 */
+		sts = CreateDocument(inNewRef);
+		if (sts != B_OK)
+			goto err;  /* 作成に失敗 */
+		
+		/* ファイル情報を記録 */
+		fHasFile = true;
+		fFileRef = inNewRef;
+		this->SetTitle(inNewRef.name);
+	}
+	
+	/* テキストデータをファイルに書き込む */
+	sts = myFile.SetTo(&fFileRef, B_WRITE_ONLY);
+	if (sts == B_ENTRY_NOT_FOUND) {
+		/* ファイルが見当たらなければ作り直す */
+		sts = CreateDocument(fFileRef);
+		if (sts == B_OK)
+			sts = myFile.SetTo(&fFileRef, B_WRITE_ONLY);
+	}
+	if (sts != B_OK)
+		goto err;  /* ファイルを開けない */
+	(void)myFile.Write(theTextView->Text(), theTextView->TextLength());
+	SaveStyleRunArray(myFile, theTextView);  /* スタイル情報を保存 */
+	theTextView->MakeClean();  /* 変更内容を保存した */
+	
+	/* 必要ならば自身に対する終了要求を発行 */
+	if (fInQuitting)
+		this->PostMessage(B_QUIT_REQUESTED);
+	
+	return;
+err:
+	::Error("MemoWindow::SaveDocumentTo", sts);
+	return;
+}
+
+void
+MemoWindow::ShowSavePanel (void)
+{
+	/* 必要ならセーブダイアログを生成 */
+	if (fSavePanel == NULL) {
+		BMessenger	messenger(this);
+		fSavePanel = new BFilePanel(B_SAVE_PANEL, &messenger);
+	}
+	
+	/* セーブダイアログを表示 */
+	if (fSavePanel->IsShowing())
+		fSavePanel->Window()->Activate();
+	else {
+		BWindow*		theWindow = fSavePanel->Window();
+		BTextControl*	theEditField;
+		BAutolock		lock(theWindow);
+
+		theEditField = cast_as(
+			theWindow->FindView("text view"), BTextControl
+		);
+		theEditField->SetText(this->Title());
+		theEditField->TextView()->SelectAll();
+		fSavePanel->Show();
+	}
+	
+	return;
+}
+
+/*
+ * メッセージ応答; MemoWindow
+ */
+void
+MemoWindow::SaveRequested (BMessage* message)
+{
+	status_t	sts;
+	entry_ref	theDirRef, theFileRef;
+	BDirectory	theDir;
+	BEntry		theEntry;
+	char*		theFileName;
+	
+	/* 保存先のエントリ情報を取得 */
+	sts = message->FindRef(kDirArg, &theDirRef);
+	if (sts != B_OK)
+		goto err;
+	sts = message->FindString(kNameArg, &theFileName);
+	if (sts != B_OK)
+		goto err;
+	
+	/* 保存先ファイルのエントリ情報を作成 */
+	sts = theDir.SetTo(&theDirRef);
+	if (sts != B_OK)
+		goto err;
+	sts = theEntry.SetTo(&theDir, theFileName);
+	if (sts != B_OK)
+		goto err;
+	sts = theEntry.GetRef(&theFileRef);
+	if (sts != B_OK)
+		goto err;
+
+	/* 保存処理を実行 */
+	this->SaveDocumentTo(theFileRef);
+
+	return;
+err:
+	::Error("MemoWindow::SaveRequested", sts);
+	return;
+}
+
+/*
+ * 終了時処理; MemoWindow
+ */
+bool
+MemoWindow::QuitRequested (void)
+{
+	bool		allowQuit = true;
+	MyTextView*	theTextView = this->GetTextView();
+	
+	/* テキストに変更を加えている場合はユーザに確認 */
+	if (theTextView->IsDirty()) {
+		BAlert*	theAlert;
+		int32	buttonIndex;
+		char	strBuf[1024];
+	
+		/* 確認用のダイアログを作成 */
+		sprintf(strBuf,
+			"Save changes to the document \"%s\"?",
+			this->Title()
+		);
+		theAlert = new BAlert(B_EMPTY_STRING, 
+			strBuf,
+			"Don't Save", "Cancel", "Save",
+			B_WIDTH_FROM_WIDEST, B_INFO_ALERT
+		);
+		theAlert->SetShortcut(1, B_ESCAPE);
+	
+		/* ユーザの応答を待つ */
+		buttonIndex = theAlert->Go();
+		switch (buttonIndex) {
+		case 0:	/* Don't Save */
+			break;
+		case 1:	/* Cancel */
+			allowQuit = false;
+			break;
+		case 2:	/* Save */
+			allowQuit   = false;
+			fInQuitting = true;  /* セーブしたら終了 */
+			this->PostMessage(SAVE_DOC);
+			break;
+		}
+	}
+	
+	return allowQuit;
+}
+
+void
+MemoWindow::Quit (void)
+{
+	BMessage	quitMessage(fQuitMsg);
+	
+	/* アプリケーションに終了を通知 */
+	quitMessage.AddPointer(kSenderArg, this);
+	(void)be_app->PostMessage(&quitMessage);
+	
+	/* 親クラスのメソッドを実行 */
+	BWindow::Quit();
+	
+	return;
+}
+
+/*
+ * メニュー応答; MemoWindow
+ */
+void
+MemoWindow::DoSave (void)
+{
+	/* ファイルに保存したことがない場合はセーブダイアログを開く */
+	if (! fHasFile)
+		this->ShowSavePanel();
+	else
+		this->SaveDocumentTo(fFileRef);
+	
+	return;
+}
+
+void
+MemoWindow::DoClear (void)
+{
+	/* 選択部分のテキストを削除 */
+	this->GetTextView()->Delete();
+	return;
+}
+
+void
+MemoWindow::SetFontFamily (BMessage* message)
+{
+	BTextView*	theTextView = this->GetTextView();
+	BFont		theFont;
+	BMenuItem*	theFamilyItem;
+	BMenuItem*	theStyleItem;
+	
+	/* フォントメニューの選択項目を取得 */
+	(void)message->FindPointer(kSourceArg, &theFamilyItem);
+	theStyleItem = theFamilyItem->Submenu()->FindMarked();
+	if (theStyleItem == NULL)
+		theStyleItem = theFamilyItem->Submenu()->ItemAt(0);
+	
+	/* 選択部分のフォントファミリーとスタイルを変更 */
+	theFont.SetFamilyAndStyle(
+		theFamilyItem->Label(), theStyleItem->Label()
+	);
+	theTextView->SetFontAndColor(&theFont, B_FONT_FAMILY_AND_STYLE);
+	
+	return;
+}
+
+void
+MemoWindow::SetFontStyle (BMessage* message)
+{
+	BTextView*	theTextView = this->GetTextView();
+	BFont		theFont;
+	BMenuItem*	theFamilyItem;
+	BMenuItem*	theStyleItem;
+	
+	/* フォントメニューの選択項目を取得 */
+	(void)message->FindPointer(kSourceArg, &theStyleItem);
+	theFamilyItem = theStyleItem->Menu()->Superitem();
+	
+	/* 選択部分のフォントファミリーとスタイルを変更 */
+	theFont.SetFamilyAndStyle(
+		theFamilyItem->Label(), theStyleItem->Label()
+	);
+	theTextView->SetFontAndColor(&theFont, B_FONT_FAMILY_AND_STYLE);
+
+	return;
+/*
+ * 注意：フォントメニューの選択項目を取得した後の処理は、SetFontFamily()
+ *		と同じである。なので、その部分を一つにまとめる方が良い。
+ *		('98. 5/11, koga@ftgun.co.jp)
+ */
+}
+
+void
+MemoWindow::SetFontSize (BMessage* message)
+{
+	BTextView*	theTextView = this->GetTextView();
+	BFont		theFont;
+	BMenuItem*	theSizeItem;
+	
+	/* フォントメニューの選択項目を取得 */
+	(void)message->FindPointer(kSourceArg, &theSizeItem);
+
+	/* 選択部分のフォントサイズを変更 */
+	theFont.SetSize(atoi(theSizeItem->Label()));
+	theTextView->SetFontAndColor(&theFont, B_FONT_SIZE);
+
+	return;
+}
+
+void
+MemoWindow::ToggleLineAdjust (BMessage* message)
+{
+	MyTextView*	theTextView = this->GetTextView();
+	BMenuItem*	theMenuItem;
+	
+	/* 選択されたメニュー項目を取得 */
+	theMenuItem = this->KeyMenuBar()->FindItem(message->what);
+	
+	/* メニュー項目の状態に応じてテキスト幅の調節動作をトグル */
+	theMenuItem->SetMarked(! theMenuItem->IsMarked());
+	theTextView->SetLineAdjust(theMenuItem->IsMarked());
+	
+	return;
+}
+
+/*
+ * メニュー調節; MemoWindow
+ */
+void
+MemoWindow::MenusBeginning (void)
+{
+	BMenuBar*	theMenuBar = this->KeyMenuBar();
+
+	this->AdjustFileMenu(theMenuBar);
+	this->AdjustEditMenu(theMenuBar);
+	this->AdjustFontMenu(theMenuBar);
+
+	return;
+}
+
+void
+MemoWindow::AdjustFileMenu (BMenuBar* inMenuBar)
+{
+	bool	isDirty = this->GetTextView()->IsDirty();
+
+	/* "Save"と"Save As..."を調節 */	
+	inMenuBar->FindItem(SAVE_DOC)->SetEnabled(isDirty);
+	inMenuBar->FindItem(SAVE_DOC_AS)->SetEnabled(isDirty || fHasFile);
+	
+	return;
+}
+
+void
+MemoWindow::AdjustEditMenu (BMenuBar* inMenuBar)
+{
+	bool		isValidSel;
+	int32		selStart, selEnd;
+	BTextView*	theTextView = this->GetTextView();
+	
+	/* テキストの選択範囲をチェック */
+	theTextView->GetSelection(&selStart, &selEnd);
+	isValidSel = (selStart != selEnd);
+	
+	/* "Cut", "Copy", "Clear"を調節 */
+	inMenuBar->FindItem(B_CUT)->SetEnabled(isValidSel);
+	inMenuBar->FindItem(B_COPY)->SetEnabled(isValidSel);
+	inMenuBar->FindItem(EDIT_CLEAR)->SetEnabled(isValidSel);
+	
+	/* "Paste"を調節 */
+	inMenuBar->FindItem(B_PASTE)->SetEnabled(
+		theTextView->AcceptsPaste(be_clipboard)
+	);
+	
+	return;
+}
+
+void
+MemoWindow::AdjustFontMenu (BMenuBar* inMenuBar)
+{
+	BTextView*	theTextView = this->GetTextView();
+	BFont		theFont;
+	uint32		theMode;
+	font_family	theFamily;
+	font_style	theStyle;
+	char		sizeStr[32];
+	BMenuItem*	theMenuItem;
+	BMenu*		theFontMenu = inMenuBar->SubmenuAt(2);
+
+	/* 各項目の選択を解除 */
+	theMenuItem = theFontMenu->SubmenuAt(0)->FindMarked();
+	if (theMenuItem != NULL)  /* サイズ指定項目 */
+		theMenuItem->SetMarked(false);
+	theMenuItem = theFontMenu->FindMarked();
+	if (theMenuItem != NULL) {  /* ファミリー指定項目 */
+		theMenuItem->SetMarked(false);
+		theMenuItem = theMenuItem->Submenu()->FindMarked();
+		if (theMenuItem != NULL)  /* スタイル指定項目 */
+			theMenuItem->SetMarked(false);
+	}
+
+	/* 選択部分のフォントを取得 */
+	theTextView->GetFontAndColor(&theFont, &theMode);
+	theFont.GetFamilyAndStyle(&theFamily, &theStyle);
+	
+	/* "Size"サブメニューの選択項目を調節 */
+	if (theMode & B_FONT_SIZE) {
+		sprintf(sizeStr, "%d", (int)theFont.Size());
+		theMenuItem = theFontMenu->SubmenuAt(0)->FindItem(sizeStr);
+		if (theMenuItem != NULL)
+			theMenuItem->SetMarked(true);
+	}
+
+	/* フォントファミリーとスタイル指定の選択項目を調節 */	
+	if (theMode & B_FONT_FAMILY_AND_STYLE) {
+		/* フォントファミリーの選択項目を調節 */
+		theMenuItem = theFontMenu->FindItem(theFamily);
+		theMenuItem->SetMarked(true);
+
+		/* フォントスタイルの選択項目を調節 */
+		theMenuItem = theMenuItem->Submenu()->FindItem(theStyle);
+		theMenuItem->SetMarked(true);
+	}
+	
+	return;
+/*
+ * 注意：選択部分の中で、たとえば複数のサイズを含む場合はサイズサブメ
+ *		ニューの項目が選ばれないようにしている。これは、選択した部分
+ *		においてはその属性が一意でないことを表わすためである。
+ *		('98. 5/11, koga@ftgun.co.jp)
+ */
+}
+
+
+/*      #########################################################       */
+/*      #             P U B L I C   F U N C T I O N S           #       */
+/*      #########################################################       */
+
+/* MemoWindowクラスの公開メソッド */
+/*
+ * 初期化と解放; MemoWindow
+ */
+MemoWindow::MemoWindow (BRect frame, const char* inTitle, uint32 quitMsg)
+	: BWindow(frame, inTitle, B_DOCUMENT_WINDOW, 0)
+{
+	/* データメンバを初期化 */
+	fHasFile    = false;
+	fInQuitting = false;
+	fQuitMsg    = quitMsg;
+	fSavePanel  = NULL;
+	
+	/* 自分の出現位置をセット */
+	if (sNextLeftTop.x == -1 && sNextLeftTop.y == -1)
+		sNextLeftTop = frame.LeftTop();
+	else {
+		BScreen	theScreen;
+	
+		this->MoveTo(sNextLeftTop);
+		if (! theScreen.Frame().Contains(this->Frame().LeftTop())) {
+			this->MoveTo(kPositionDelta, kPositionDelta);
+			sNextLeftTop = this->Frame().LeftTop();
+		}  /* スクリーンの右下隅にはみ出したらリセット */
+	}
+	
+	/* 次のウィンドウの出現位置を計算 */
+	sNextLeftTop += BPoint(kPositionDelta, kPositionDelta);
+}
+
+MemoWindow::~MemoWindow (void)
+{
+	delete fSavePanel;
+}
+
+void
+MemoWindow::InitContent (BMenuBar* inMenuBar, bool doShow)
+{
+	BTextView*		theTextView;
+	BScrollView*	theScrollView;
+	BMenu*			theMenu;
+	BRect			theBounds = this->Bounds(), theFrame;
+	BRect			mbarFrame;
+
+	/* メニューバーを貼りつける */	
+	this->AddChild(inMenuBar);
+	mbarFrame = inMenuBar->Frame();
+
+	/* テキストビューとスクロールビューを生成 */
+	theTextView = new MyTextView(
+		BRect(
+			0, mbarFrame.Height() + 1,
+			theBounds.Width(), theBounds.Height()
+		),
+		kTextViewName,
+		BRect(3, 3, 250, 0),
+		B_FOLLOW_ALL_SIDES, B_WILL_DRAW
+	);
+	theTextView->SetStylable(true);
+	theTextView->MakeFocus();
+	theTextView->ResizeBy(-B_V_SCROLL_BAR_WIDTH, -B_H_SCROLL_BAR_HEIGHT);
+//	theScrollView = new BScrollView(
+//		B_EMPTY_STRING, theTextView, B_FOLLOW_ALL, 0, true, true
+//	);
+	theScrollView = new MyScrollView(
+		B_EMPTY_STRING, theTextView, B_FOLLOW_ALL, 0
+	);
+	this->AddChild(theScrollView);
+	theTextView->MakeFocus();
+	if (doShow)
+		this->Show();  /* 自身を画面に出す */
+		
+	/* メニューのターゲットを設定 */
+	theMenu = inMenuBar->SubmenuAt(0);  /* Fileメニュー */
+	theMenu->SetTargetForItems(be_app);
+	MenuUtil::SetTargetOf(inMenuBar, SAVE_DOC, this);
+	MenuUtil::SetTargetOf(inMenuBar, SAVE_DOC_AS, this);
+	MenuUtil::SetTargetOf(inMenuBar, kCloseLabel, this);
+
+	theMenu = inMenuBar->SubmenuAt(1);  /* Editメニュー */
+	theMenu->SetTargetForItems(theTextView);
+	
+	return;
+}
+
+/*
+ * テキストファイルの読み込みと保存; MemoWindow
+ */
+void
+MemoWindow::LoadFile (const entry_ref& inRef)
+{
+	BAutolock	lock(this);  /* 自身をロック */
+	BTextView*	theTextView = this->GetTextView();
+	BFile		fileObj(&inRef, B_READ_ONLY);
+	off_t		fileSize;
+
+	/* テキストビューにファイルの内容をセット */
+	fileObj.GetSize(&fileSize);
+	theTextView->SetText(&fileObj, 0, fileSize);
+	LoadStyleRunArray(fileObj, theTextView);  /* スタイル情報をロード */
+	
+	/* ファイル情報を更新 */
+	fFileRef = inRef;
+	fHasFile = true;
+	this->SetTitle(inRef.name);
+	
+	/* まだ隠れていれば画面に表示 */
+	if (this->IsHidden())
+		this->Show();
+	
+	return;
+/*
+ * 注意：本当は、指定されたファイルのパーミッションをチェックして書き込
+ *		み可能かどうかを調べた方がよいが、ここでは省略している。
+ *		('98. 5/11, koga@ftgun.co.jp)
+ */
+}
+
+bool
+MemoWindow::GetEntryRef (entry_ref* outRef) const
+{
+	/* ファイルが有効なら引数にセット */
+	if (fHasFile)
+		*outRef = fFileRef;
+	
+	return fHasFile;
+}
+
+
+/*
+ * End of File
+ */
